@@ -8,15 +8,24 @@ This repository contains the exact Port5 build that was tested on the device. It
 
 ## Verified runtime
 
-The complete 3 x 3 directed band matrix passed on the physical device:
+The complete 3 x 3 directed band matrix and three MLO-primary scenarios passed on the physical device:
 
-| Primary (`wlan0`) | Secondary (`wlan1`) | Result |
-|---|---|---|
-| 2.4 GHz | 2.4 GHz / 5 GHz / 6 GHz | PASS (3/3) |
-| 5 GHz | 2.4 GHz / 5 GHz / 6 GHz | PASS (3/3) |
-| 6 GHz | 2.4 GHz / 5 GHz / 6 GHz | PASS (3/3) |
+| # | Primary (`wlan0`) | Secondary (`wlan1`) | Result |
+|---|---|---|---|
+| 1 | 2.4 GHz | 2.4 GHz, different AP/BSSID | PASS |
+| 2 | 2.4 GHz | 5 GHz | PASS |
+| 3 | 2.4 GHz | 6 GHz | PASS |
+| 4 | 5 GHz | 2.4 GHz | PASS |
+| 5 | 5 GHz | 5 GHz, different AP/BSSID | PASS |
+| 6 | 5 GHz | 6 GHz | PASS |
+| 7 | 6 GHz | 2.4 GHz | PASS |
+| 8 | 6 GHz | 5 GHz | PASS |
+| 9 | 6 GHz Wi-Fi 7, BE9300 | 6 GHz Wi-Fi 6E, AXE75 | PASS |
+| 10 | Combined 5+6 GHz MLO | 2.4 GHz, different router | PASS |
+| 11 | Combined 5+6 GHz MLO | 5 GHz, separate SSID/BSSID | PASS |
+| 12 | Combined 5+6 GHz MLO | 6 GHz, different router/MLD | PASS |
 
-MLO scenarios also passed with the combined 5+6 GHz MLO SSID as primary and 2.4 GHz, 5 GHz or a **different router's** 6 GHz SSID as secondary. The only unsupported case is combined MLO plus the standalone 6 GHz SSID from the **same physical router/MLD**; that association is rejected by the AP.
+**Unsupported same-MLD case:** combined 5+6 GHz MLO as primary plus the standalone 6 GHz SSID from the same physical BE9300/MLD is association-rejected. The same MLO+6 GHz layout passes when the secondary 6 GHz AP is the separate AXE75 router.
 
 Additional verified behavior:
 
