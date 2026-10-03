@@ -1,0 +1,6 @@
+id=aks_crdroid17_exact_dualsta_wifi
+name=POCO F7 crDroid 17 Exact Dual-STA Wi-Fi Framework
+version=1.5-port5-test
+versionCode=15
+author=AKS
+description=crDroid 17 PixelOS Dual-STA port with root-owned exact secondary requests, cached-scan replay, pre-scan wlan1 readiness and MBB disabled; exact stock hash guarded

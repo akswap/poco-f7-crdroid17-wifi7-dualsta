@@ -1,0 +1,6 @@
+id=onyx_dualsta_overlay
+name=POCO F7 crDroid 17 Exact Dual STA Controller
+version=1.8.0-crdroid17-port5
+versionCode=18
+author=AKS
+description=App-controlled exact SSID/BSSID secondary STA for crDroid 17; paired with framework port5 and 45-second association timeout

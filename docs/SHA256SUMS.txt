@@ -1,0 +1,4 @@
+aa9b62c83f8f7de93787059f711b488b1a004faf85de6f8dc517042cd8ef80c9  packages/DualStaProfileManager-crDroid17-v1.5.2-wifi7-parser.apk
+57ce78268d14724696fb7defbd387e3394e9c7aacc13494356a5fb41a12ccc1a  packages/POCO-F7-crDroid13-A17-WiFi7-6GHz-320MHz-v1.2-UNIFIED.zip
+b0cb25da804707b8736b60280de13e46224a78bad2dac997f287c9643c8e8e0e  packages/POCO-F7-crDroid17-Exact-Dual-STA-Controller-v1.8-port5-TEST.zip
+fd218cef3085effef63a163def2371804150e79d88c95d24cad94531157931c8  packages/POCO-F7-crDroid17-Exact-Dual-STA-Framework-v1.5-port5-TEST.zip

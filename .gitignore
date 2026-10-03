@@ -1,0 +1,26 @@
+# Android/Gradle output
+.gradle/
+.kotlin/
+**/build/
+local.properties
+.idea/
+.aistudio/
+*.iml
+
+# Signing material must never be committed
+*.jks
+*.keystore
+release.keystore
+
+# Device-specific profiles, logs and dumps
+/profiles.conf
+*.log
+ui-*.xml
+phone-*.png
+*.etl
+
+# Local environment
+.env
+.env.*
+metadata.json
+*.local
