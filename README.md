@@ -1,4 +1,4 @@
-# POCO F7 crDroid 17 Wi-Fi 7 Dual STA
+# POCO F7 crDroid 17 Wi-Fi 7 Dual STA (Dual WI-FI) & 6Ghz 320Mhz Hotspot Work's 
 
 ROM-specific Wi-Fi framework port, Magisk controller and profile-manager APK for **POCO F7 / onyx** running:
 
