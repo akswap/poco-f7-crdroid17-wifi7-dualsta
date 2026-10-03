@@ -8,11 +8,15 @@ This repository contains the exact Port5 build that was tested on the device. It
 
 ## Verified runtime
 
-| Primary (`wlan0`) | Secondary (`wlan1`) | Result | Notes |
-|---|---|---|---|
-| 6 GHz Wi-Fi 7 / MLO, 320 MHz | 5 GHz Wi-Fi 7, 160 MHz | Verified | Both interfaces associated concurrently; live rates reached 5764.6 and 2882.3 Mbps. |
-| 5 GHz | 5 GHz | Verified | Same-band concurrent STA worked with two different AP profiles. |
-| 5 GHz | 2.4 GHz | Verified | Secondary switched successfully after selection in the manager. |
+The complete 3 x 3 directed band matrix passed on the physical device:
+
+| Primary (`wlan0`) | Secondary (`wlan1`) | Result |
+|---|---|---|
+| 2.4 GHz | 2.4 GHz / 5 GHz / 6 GHz | PASS (3/3) |
+| 5 GHz | 2.4 GHz / 5 GHz / 6 GHz | PASS (3/3) |
+| 6 GHz | 2.4 GHz / 5 GHz / 6 GHz | PASS (3/3) |
+
+MLO scenarios also passed with the combined 5+6 GHz MLO SSID as primary and 2.4 GHz, 5 GHz or a **different router's** 6 GHz SSID as secondary. The only unsupported case is combined MLO plus the standalone 6 GHz SSID from the **same physical router/MLD**; that association is rejected by the AP.
 
 Additional verified behavior:
 
@@ -23,6 +27,7 @@ Additional verified behavior:
 - Selecting the active primary BSSID as the secondary target is rejected.
 - Profile writes are atomic and verified through privileged read-back.
 - The manager reports Qualcomm's secondary `HE-MCS 12/13` label as Wi-Fi 7 because MCS 12/13 are EHT-only rates.
+- A secondary 6 GHz link operates as Wi-Fi 6E/HE at up to 160 MHz; primary 6 GHz can use Wi-Fi 7/EHT at 320 MHz.
 
 Live verified example:
 
@@ -31,7 +36,7 @@ wlan0: TP-Link_6G_be, 6295 MHz, 320 MHz EHT, 5764.6 Mbps
 wlan1: TP-Link_5G_be, 5640 MHz, 160 MHz, 2882.3 Mbps
 ```
 
-The full test matrix, evidence boundaries and unclaimed combinations are documented in [runtime verification](docs/VERIFICATION.md).
+The full 12-scenario matrix, traffic checks and the same-MLD limitation are documented in [runtime verification](docs/VERIFICATION.md).
 
 ## Packages
 

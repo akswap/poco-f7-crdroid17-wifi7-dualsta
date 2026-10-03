@@ -8,35 +8,59 @@
 - Controller: Port5 secondary-only controller
 - Manager: `DualStaProfileManager-crDroid17-v1.5.2-wifi7-parser.apk`
 
-These are physical-device runtime results. Unit-test results for the Android source are separate and do not replace radio verification.
+These are physical-device runtime results. A PASS requires both associations to reach `COMPLETED`, separate interface addresses, and interface-bound traffic. Unit tests do not replace radio verification.
 
-## Concurrent STA matrix
+## Complete directed band matrix
 
 | Test | Primary STA (`wlan0`) | Secondary STA (`wlan1`) | Result |
 |---|---|---|---|
-| A | 6 GHz Wi-Fi 7 / MLO, 320 MHz | 5 GHz Wi-Fi 7, 160 MHz | PASS |
-| B | 5 GHz | 5 GHz | PASS |
-| C | 5 GHz | 2.4 GHz | PASS |
+| 1 | 2.4 GHz | 2.4 GHz, different AP/BSSID | PASS |
+| 2 | 2.4 GHz | 5 GHz | PASS |
+| 3 | 2.4 GHz | 6 GHz | PASS |
+| 4 | 5 GHz | 2.4 GHz | PASS |
+| 5 | 5 GHz | 5 GHz, different AP/BSSID | PASS |
+| 6 | 5 GHz | 6 GHz | PASS |
+| 7 | 6 GHz | 2.4 GHz | PASS |
+| 8 | 6 GHz | 5 GHz | PASS |
+| 9 | 6 GHz Wi-Fi 7 (BE9300) | 6 GHz Wi-Fi 6E (AXE75) | PASS |
 
-The same-band 5 GHz test used separate AP profiles. The repository does not claim that both interfaces can associate to the same BSSID.
-
-## Live radio evidence
-
-The strongest captured simultaneous link state was:
+The 6+6 test used separate routers, BSSIDs, frequencies and LAN subnets:
 
 ```text
-wlan0
-  SSID: TP-Link_6G_be
-  frequency: 6295 MHz
-  RX/TX: 5764.6 MBit/s, 320 MHz, EHT-MCS 13, NSS 2
-
-wlan1
-  SSID: TP-Link_5G_be
-  frequency: 5640 MHz
-  RX/TX: 2882.3 MBit/s, 160 MHz, HE-MCS 13, NSS 2
+wlan0: 6295 MHz, 11be, 192.168.0.x, BE9300
+wlan1: 6375 MHz, 11ax, 192.168.2.x, AXE75
 ```
 
-The Qualcomm secondary-link formatter uses an `HE-MCS 13` label. MCS 12/13 are EHT-only rates, so manager v1.5.2 treats this specific 160 MHz / MCS 12-13 pattern as Wi-Fi 7 instead of displaying Wi-Fi 6.
+The AXE75 does not answer LAN ICMP echo, so its secondary data path was verified through its management service: HTTP returned 302 and HTTPS returned 200 when bound to `wlan1`.
+
+## MLO-primary matrix
+
+| Test | Primary STA (`wlan0`) | Secondary STA (`wlan1`) | Result |
+|---|---|---|---|
+| 10 | Combined 5+6 GHz MLO | 2.4 GHz, different router | PASS |
+| 11 | Combined 5+6 GHz MLO | 5 GHz, separate SSID/BSSID | PASS |
+| 12 | Combined 5+6 GHz MLO | 6 GHz, different router/MLD | PASS |
+
+The MLO connection reported 802.11be, TID-to-link support and active 5 GHz and 6 GHz affiliated links. During several captures the 5 GHz affiliated link carried traffic while the active 6 GHz affiliated link was idle; this is valid MLO link steering behavior.
+
+## Unsupported same-MLD case
+
+This one combination failed and is not claimed as supported:
+
+```text
+Primary: combined 5+6 GHz MLO SSID on BE9300
+Secondary: standalone 6 GHz SSID on the same BE9300/MLD
+Result: association rejected (statusCode 1); wlan1 received no IP
+```
+
+The same MLO-primary plus 6 GHz-secondary layout passes when the secondary 6 GHz AP belongs to the separate AXE75 router. This isolates the failure to simultaneous use of the same physical AP/MLD, not to general MLO plus Dual STA capability.
+
+## Link-mode observations
+
+- Primary 6 GHz supports Wi-Fi 7/EHT at 320 MHz and up to 5764 Mbps in the captured setup.
+- Secondary 6 GHz consistently operates as Wi-Fi 6E/HE at up to 160 MHz and 2401 Mbps.
+- Qualcomm can format a secondary 5 GHz EHT-rate link as `HE-MCS 12/13`. Manager v1.5.2 recognizes this 2882 Mbps pattern as Wi-Fi 7 rather than displaying Wi-Fi 6.
+- Same-band 2.4+2.4, 5+5 and 6+6 were verified with different APs/BSSIDs.
 
 ## Lifecycle and manager checks
 
@@ -53,14 +77,4 @@ The Qualcomm secondary-link formatter uses an `HE-MCS 13` label. MCS 12/13 are E
 | Password is omitted from diagnostics and public package | PASS |
 | 6 GHz / 320 MHz hotspot remains provided by the unified module | PASS |
 
-## Evidence boundary
-
-The following combinations are not claimed as verified on this exact crDroid 17 Port5 build until a physical-device result is recorded:
-
-- primary 2.4 GHz + secondary 5 GHz
-- primary 2.4 GHz + secondary 6 GHz
-- primary 6 GHz + secondary 2.4 GHz
-- primary 2.4 GHz + secondary 2.4 GHz
-- primary 6 GHz + secondary 6 GHz
-
-Older PixelOS, Infinity-X or crDroid 16 results are not counted as crDroid 17 Port5 verification.
+Older PixelOS, Infinity-X and crDroid 16 results are intentionally excluded from this crDroid 17 Port5 matrix.
