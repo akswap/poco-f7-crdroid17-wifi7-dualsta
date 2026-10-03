@@ -47,7 +47,7 @@ wlan1: TP-Link_5G_be, 5640 MHz, 160 MHz, 2882.3 Mbps
 
 The full 12-scenario matrix, traffic checks and the same-MLD limitation are documented in [runtime verification](docs/VERIFICATION.md).
 
-## Packages
+## Packages & int_boot (rooted & Wlan .ko inbuilt )
 
 The `packages/` directory contains:
 
@@ -55,6 +55,7 @@ The `packages/` directory contains:
 2. `POCO-F7-crDroid17-Exact-Dual-STA-Framework-v1.5-port5-TEST.zip`
 3. `POCO-F7-crDroid17-Exact-Dual-STA-Controller-v1.8-port5-TEST.zip`
 4. `DualStaProfileManager-crDroid17-v1.5.2-wifi7-parser.apk`
+5. `init_boot_a_crDroid17_DualSTA_TEST.img`
 
 Install the three Magisk ZIPs, reboot, then install the APK. Keep a known-working `init_boot.img` and the previous Port4 modules available before testing.
 
