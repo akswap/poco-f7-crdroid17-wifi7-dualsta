@@ -10,12 +10,13 @@
 ## Install
 
 1. Install the unified Wi-Fi 7/6 GHz module from `packages/` in Magisk.
-2. Install the Port5 framework module.
-3. Install the paired Port5 controller module.
-4. Reboot once.
-5. Install the v1.5.2 APK.
-6. Open the manager, scan, choose an AP, enter its password and use **Connect #1**.
-7. Verify both links with:
+2. Flash init_boot_a_crDroid17_DualSTA_TEST.img  ```fastboot flash init_boot init_boot_a_crDroid17_DualSTA_TEST.img```
+4. Install the Port5 framework module.
+5. Install the paired Port5 controller module.
+6. Reboot once.
+7. Install the v1.5.2 APK.
+8. Open the manager, scan, choose an AP, enter its password and use **Connect #1**.
+9. Verify both links with:
 
 ```sh
 su
