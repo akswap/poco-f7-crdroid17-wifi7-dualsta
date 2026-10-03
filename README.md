@@ -8,12 +8,20 @@ This repository contains the exact Port5 build that was tested on the device. It
 
 ## Verified runtime
 
-- `wlan0`: primary STA remains managed by Android.
-- `wlan1`: secondary STA is created and controlled by the root controller.
-- Reboot auto-connect works without a manual shell command.
-- Primary 6 GHz Wi-Fi 7, 320 MHz + secondary 5 GHz Wi-Fi 7, 160 MHz.
-- Primary 5 GHz + secondary 5 GHz.
-- Primary 5 GHz + secondary 2.4 GHz after selecting the profile in the manager.
+| Primary (`wlan0`) | Secondary (`wlan1`) | Result | Notes |
+|---|---|---|---|
+| 6 GHz Wi-Fi 7 / MLO, 320 MHz | 5 GHz Wi-Fi 7, 160 MHz | Verified | Both interfaces associated concurrently; live rates reached 5764.6 and 2882.3 Mbps. |
+| 5 GHz | 5 GHz | Verified | Same-band concurrent STA worked with two different AP profiles. |
+| 5 GHz | 2.4 GHz | Verified | Secondary switched successfully after selection in the manager. |
+
+Additional verified behavior:
+
+- `wlan0` remains the Android-managed primary STA.
+- `wlan1` is created as the secondary STA and stays under the root controller.
+- `wlan1` reconnects after reboot without a manual shell command.
+- Scan, profile selection and secondary-only switching work from the manager APK.
+- Selecting the active primary BSSID as the secondary target is rejected.
+- Profile writes are atomic and verified through privileged read-back.
 - The manager reports Qualcomm's secondary `HE-MCS 12/13` label as Wi-Fi 7 because MCS 12/13 are EHT-only rates.
 
 Live verified example:
@@ -22,6 +30,8 @@ Live verified example:
 wlan0: TP-Link_6G_be, 6295 MHz, 320 MHz EHT, 5764.6 Mbps
 wlan1: TP-Link_5G_be, 5640 MHz, 160 MHz, 2882.3 Mbps
 ```
+
+The full test matrix, evidence boundaries and unclaimed combinations are documented in [runtime verification](docs/VERIFICATION.md).
 
 ## Packages
 
