@@ -20,6 +20,20 @@ This repository contains the exact Port5 build that was tested on the device. It
 
 > Failover decisions are based on Internet reachability, not only Wi-Fi association status.
 
+## Real Dual-STA Failover — Verified
+
+Dual-STA was validated using a primary 2.4 GHz IoT SSID that remained
+associated but did not provide Internet access.
+
+- `wlan0`: Connected to the primary IoT SSID, but Internet was unavailable.
+- `wlan1`: Connected to a secondary Wi-Fi network with validated Internet.
+- The controller detected the primary connectivity failure and automatically
+  routed Internet traffic through `wlan1`.
+- The primary Wi-Fi association remained active during failover.
+- A live HTTP connectivity test returned HTTP 204 through the secondary network.
+
+**Result: PASS — simultaneous STA + STA association with functional,
+Internet-aware automatic failover was successfully verified.**
 
 ## Verified runtime
 
