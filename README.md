@@ -6,6 +6,21 @@ ROM-specific Wi-Fi framework port, Magisk controller and profile-manager APK for
 
 This repository contains the exact Port5 build that was tested on the device. It is not a universal Android or MIUI module.
 
+## How It Works
+
+- **Primary Wi-Fi (wlan0):** Supports 2.4 GHz, 5 GHz, 6 GHz, and MLO.
+- **Secondary Wi-Fi (wlan1):** Can connect to a supported SSID on any available band.
+
+### Automatic Failover Behavior
+
+1. If the **Primary Wi-Fi loses connectivity**, Internet traffic automatically switches to the **Secondary Wi-Fi**.
+2. If the **Secondary Wi-Fi disconnects**, the **Primary Wi-Fi continues providing Internet access**.
+3. When both connections are available, the **Primary Wi-Fi is preferred**, while the **Secondary Wi-Fi remains connected as a backup**.
+4. When the Primary Wi-Fi recovers, Internet traffic automatically switches back to it after connectivity is confirmed.
+
+> Failover decisions are based on Internet reachability, not only Wi-Fi association status.
+
+
 ## Verified runtime
 
 The complete 3 x 3 directed band matrix and three MLO-primary scenarios passed on the physical device:
