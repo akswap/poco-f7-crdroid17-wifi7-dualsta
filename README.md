@@ -81,8 +81,8 @@ The full 12-scenario matrix, traffic checks and the same-MLD limitation are docu
 The `packages/` directory contains:
 
 1. `POCO-F7-crDroid13-A17-WiFi7-6GHz-320MHz-v1.2-UNIFIED.zip`
-2. `POCO-F7-crDroid17-Exact-Dual-STA-Framework-v1.5-port5-TEST.zip`
-3. `POCO-F7-crDroid17-Exact-Dual-STA-Controller-v1.8-port5-TEST.zip`
+2. `POCO-F7-crDroid17-Exact-Dual-STA-Framework-v1.7-port5-INTERNET.zip`
+3. `POCO-F7-crDroid17-Exact-Dual-STA-Controller-v2.1-port5-INTERNET.zip`
 4. `DualStaProfileManager-crDroid17-v1.5.2-wifi7-parser.apk`
 5. `init_boot_a_crDroid17_DualSTA_TEST.img`
 
