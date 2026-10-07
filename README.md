@@ -1,5 +1,6 @@
 # POCO F7 crDroid 17 Wi-Fi 7 Dual STA (Dual WI-FI) & 6Ghz 320Mhz Hotspot Work's 
-
+<img width="296" height="640" alt="Screenshot_20261007-091438_Dual STA Profile" src="https://github.com/user-attachments/assets/4279eb48-18e7-4922-9ccb-07f6f6f9324d" /><br>
+# This Load balance Required another Magisk Module Currently Tested only For SpeedTest  Apk (not release) 
 ROM-specific Wi-Fi framework port, Magisk controller and profile-manager APK for **POCO F7 / onyx** running:
 
 `crDroidAndroid-17.0-20261002-onyx-v13.0-BETA`
